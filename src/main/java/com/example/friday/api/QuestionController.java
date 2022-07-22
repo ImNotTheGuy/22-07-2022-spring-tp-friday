@@ -38,7 +38,6 @@ public class QuestionController {
     public void update(@RequestBody Question question, @PathVariable("id") long id){
         Question currentQuestion = findById(id);
         currentQuestion.setQuestion(question.getQuestion());
-        currentQuestion.setAnswer(question.getAnswer());
         questionService.update(currentQuestion);
     }
 

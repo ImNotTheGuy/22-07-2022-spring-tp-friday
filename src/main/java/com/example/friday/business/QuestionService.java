@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
+
 import com.example.friday.dao.QuestionRepository;
 import com.example.friday.entity.Question;
 
+@Service
 public class QuestionService implements ServiceInterface<Question> {
-
 
     @Autowired
     QuestionRepository questionRepository;
@@ -16,13 +18,12 @@ public class QuestionService implements ServiceInterface<Question> {
     @Override
     public void create(Question entity) {
         questionRepository.save(entity);
-        
     }
 
     @Override
     public void deleteById(long id) {
         questionRepository.deleteById(id);
-        
+
     }
 
     @Override
@@ -38,8 +39,5 @@ public class QuestionService implements ServiceInterface<Question> {
     @Override
     public void update(Question entity) {
         questionRepository.save(entity);
-        
     }
- 
-    
 }

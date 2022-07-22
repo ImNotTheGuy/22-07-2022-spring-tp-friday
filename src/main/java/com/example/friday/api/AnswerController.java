@@ -39,6 +39,7 @@ public class AnswerController {
         Answer currentAnswer = findById(id);
         currentAnswer.setAnswer(answer.getAnswer());
         currentAnswer.setCorrect(answer.isCorrect());
+        currentAnswer.setQuestion(answer.getQuestion());
         answerService.update(currentAnswer);
     }
 

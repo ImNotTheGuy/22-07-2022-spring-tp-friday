@@ -3,10 +3,12 @@ package com.example.friday.business;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.friday.dao.AnswerRepository;
 import com.example.friday.entity.Answer;
 
+@Service
 public class AnswerService implements ServiceInterface<Answer>{
 
     @Autowired

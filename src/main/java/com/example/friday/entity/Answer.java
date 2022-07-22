@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,12 +21,17 @@ public class Answer {
         this.isCorrect = isCorrect;
     }
 
+    
+
     @Id
     @Column(columnDefinition = "INT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String answer;
     private boolean isCorrect;
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 
     public long getId() {
         return id;
@@ -53,6 +60,14 @@ public class Answer {
     @Override
     public String toString() {
         return "Answer [answer=" + answer + ", id=" + id + ", isCorrect=" + isCorrect + "]";
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
 }
