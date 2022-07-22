@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.friday.dao.AnswerRepository;
 import com.example.friday.entity.Answer;
+import com.example.friday.entity.Question;
 
 @Service
 public class AnswerService implements ServiceInterface<Answer>{
@@ -42,6 +43,12 @@ public class AnswerService implements ServiceInterface<Answer>{
     public Answer findById(long id) {
         return answerRepository.findById(id).get();
     }
+
+    public List<Answer> findAllByQuestion(Question question){
+        return answerRepository.findAllByQuestion(question);
+    }
+
+
     
     
 }
