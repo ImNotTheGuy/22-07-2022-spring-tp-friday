@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.friday.business.AnswerService;
 import com.example.friday.business.QuestionService;
 import com.example.friday.entity.Answer;
-import com.example.friday.entity.Question;
 
 @RestController
 public class AnswerController {
@@ -28,25 +27,8 @@ public class AnswerController {
 
     @PostMapping("answer")
     public void create(@RequestBody JSONObject jsonObject) {
+        answerService.create(jsonObject);
 
-        //TODO: CONTROLS
-
-        Answer answerToAdd = new Answer();
-
-        // Retrieve info from JsonObject
-        String answer = jsonObject.get("answer").toString();
-        boolean isCorrect = Boolean.parseBoolean(jsonObject.get("isCorrect").toString());
-
-        // use the questionId field to retrieve question using questionService
-        int questionId = Integer.parseInt(jsonObject.get("questionId").toString());
-        Question question = questionService.findById(questionId);
-
-        // set all fields to new answer object
-        answerToAdd.setAnswer(answer);
-        answerToAdd.setCorrect(isCorrect);
-        answerToAdd.setQuestion(question);
-
-        answerService.create(answerToAdd);
     }
 
     @GetMapping("answer")

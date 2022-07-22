@@ -5,7 +5,7 @@ import java.util.List;
 public interface ServiceInterface<T> {
 
     // Create
-    public void create(T entity);
+    // public void create(T entity);
 
     // Read - all
     public List<T> findAll();

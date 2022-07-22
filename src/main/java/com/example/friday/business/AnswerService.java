@@ -2,6 +2,7 @@ package com.example.friday.business;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,28 @@ public class AnswerService implements ServiceInterface<Answer>{
     @Autowired
     AnswerRepository answerRepository;
 
-    @Override
-    public void create(Answer entity) {
-        answerRepository.save(entity);
+    @Autowired
+    QuestionService questionService;
+
+    
+    public void create(JSONObject jsonObject) {
+        
+        Answer answerToAdd = new Answer();
+
+        // Retrieve info from JsonObject
+        String answer = jsonObject.get("answer").toString();
+        boolean isCorrect = Boolean.parseBoolean(jsonObject.get("isCorrect").toString());
+
+        // use the questionId field to retrieve question using questionService
+        int questionId = Integer.parseInt(jsonObject.get("questionId").toString());
+        Question question = questionService.findById(questionId);
+
+        // set all fields to new answer object
+        answerToAdd.setAnswer(answer);
+        answerToAdd.setCorrect(isCorrect);
+        answerToAdd.setQuestion(question);
+
+        answerRepository.save(answerToAdd);
         
     }
 

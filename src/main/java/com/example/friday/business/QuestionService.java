@@ -15,7 +15,7 @@ public class QuestionService implements ServiceInterface<Question> {
     @Autowired
     QuestionRepository questionRepository;
 
-    @Override
+    
     public void create(Question entity) {
         questionRepository.save(entity);
     }
