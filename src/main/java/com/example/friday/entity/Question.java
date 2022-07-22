@@ -1,5 +1,6 @@
 package com.example.friday.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 public class Question {
     
     @Id
+    @Column(columnDefinition = "INT")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 

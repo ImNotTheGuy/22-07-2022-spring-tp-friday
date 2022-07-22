@@ -1,7 +1,6 @@
 package com.example.friday.entity;
 
-import java.util.Map;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +20,7 @@ public class Answer {
     }
 
     @Id
+    @Column(columnDefinition = "INT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String answer;
