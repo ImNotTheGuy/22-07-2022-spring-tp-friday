@@ -28,15 +28,17 @@ public class AnswerService implements ServiceInterface<Answer>{
     public List<Answer> findAll() {
         return answerRepository.findAll();
     }
-
-    @Override
-    public Answer findById(long id) {
-        return answerRepository.findById(id).get();
-    }
+    
 
     @Override
     public void update(Answer entity) {
         answerRepository.save(entity);        
+        
+    }
+
+    @Override
+    public Answer findById(long id) {
+        return answerRepository.findById(id).get();
     }
     
     
