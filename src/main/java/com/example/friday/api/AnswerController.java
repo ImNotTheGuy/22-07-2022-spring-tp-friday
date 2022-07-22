@@ -43,11 +43,8 @@ public class AnswerController {
 
     @PatchMapping("answer/{id}")
     public void update(@RequestBody Answer answer, @PathVariable("id") long id){
-        Answer currentAnswer = findById(id);
-        currentAnswer.setAnswer(answer.getAnswer());
-        currentAnswer.setCorrect(answer.isCorrect());
-        currentAnswer.setQuestion(answer.getQuestion());
-        answerService.update(currentAnswer);
+        
+        answerService.update(answer, id);
     }
 
     @DeleteMapping("answer/{id}")

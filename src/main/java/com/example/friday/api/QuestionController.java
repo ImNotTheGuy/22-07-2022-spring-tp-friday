@@ -1,6 +1,7 @@
 package com.example.friday.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.friday.business.AnswerService;
 import com.example.friday.business.QuestionService;
-import com.example.friday.entity.Answer;
 import com.example.friday.entity.Question;
 
 @RestController
@@ -36,26 +36,19 @@ public class QuestionController {
     }
 
     @GetMapping("question/{id}")
-    public Question findById(@PathVariable("id") long id){
-        return questionService.findById(id);
+    public Map<String, List<String>> findAnswers(@PathVariable("id") long questionId){
+        Question question = questionService.findById(questionId);
+        return questionService.listAnswers(question);
     }
 
     @PatchMapping("question/{id}")
     public void update(@RequestBody Question question, @PathVariable("id") long id){
-        Question currentQuestion = findById(id);
-        currentQuestion.setQuestion(question.getQuestion());
-        questionService.update(currentQuestion);
+        questionService.update(question, id);
     }
 
     @DeleteMapping("question/{id}")
     public void deleteById(@PathVariable("id") long id){
         questionService.deleteById(id);
-    }
-
-    @GetMapping("question/listofanswers/{id}")
-    public List<Answer> findAnswers(@PathVariable("id") long questionId){
-        Question question = findById(questionId);
-        return answerService.findAllByQuestion(question);
     }
 
 }

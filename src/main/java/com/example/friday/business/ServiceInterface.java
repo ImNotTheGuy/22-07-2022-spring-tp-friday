@@ -14,7 +14,7 @@ public interface ServiceInterface<T> {
     public T findById(long id);
 
     // Update
-    public void update(T entity);
+    // public void update(T entity);
 
     // Delete
     public void deleteById(long id);

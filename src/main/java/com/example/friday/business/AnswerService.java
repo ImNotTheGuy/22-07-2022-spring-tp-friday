@@ -11,7 +11,7 @@ import com.example.friday.entity.Answer;
 import com.example.friday.entity.Question;
 
 @Service
-public class AnswerService implements ServiceInterface<Answer>{
+public class AnswerService implements ServiceInterface<Answer> {
 
     @Autowired
     AnswerRepository answerRepository;
@@ -19,9 +19,8 @@ public class AnswerService implements ServiceInterface<Answer>{
     @Autowired
     QuestionService questionService;
 
-    
     public void create(JSONObject jsonObject) {
-        
+
         Answer answerToAdd = new Answer();
 
         // Retrieve info from JsonObject
@@ -38,25 +37,27 @@ public class AnswerService implements ServiceInterface<Answer>{
         answerToAdd.setQuestion(question);
 
         answerRepository.save(answerToAdd);
-        
+
     }
 
     @Override
     public void deleteById(long id) {
         answerRepository.deleteById(id);
-        
+
     }
 
     @Override
     public List<Answer> findAll() {
         return answerRepository.findAll();
     }
-    
 
-    @Override
-    public void update(Answer entity) {
-        answerRepository.save(entity);        
-        
+    public void update(Answer entity, long id) {
+        Answer currentAnswer = findById(id);
+        currentAnswer.setAnswer(entity.getAnswer());
+        currentAnswer.setCorrect(entity.isCorrect());
+        currentAnswer.setQuestion(entity.getQuestion());
+        answerRepository.save(currentAnswer);
+
     }
 
     @Override
@@ -64,11 +65,8 @@ public class AnswerService implements ServiceInterface<Answer>{
         return answerRepository.findById(id).get();
     }
 
-    public List<Answer> findAllByQuestion(Question question){
+    public List<Answer> findAllByQuestion(Question question) {
         return answerRepository.findAllByQuestion(question);
     }
 
-
-    
-    
 }
