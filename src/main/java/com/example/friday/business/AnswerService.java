@@ -1,6 +1,7 @@
 package com.example.friday.business;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class AnswerService implements ServiceInterface<Answer> {
     QuestionService questionService;
 
     public void create(JSONObject jsonObject) {
+
+        //TODO: refactor to only use google.gson library
 
         Answer answerToAdd = new Answer();
 
@@ -48,25 +51,38 @@ public class AnswerService implements ServiceInterface<Answer> {
 
     @Override
     public List<Answer> findAll() {
-        return answerRepository.findAll();
+        try {
+            return answerRepository.findAll();
+        } catch (NoSuchElementException nsExc) {
+            return null;
+        }
+
     }
 
     public void update(Answer entity, long id) {
-        Answer currentAnswer = findById(id);
+        Answer currentAnswer = answerRepository.findById(id).get();
+        System.out.println(entity);
         currentAnswer.setAnswer(entity.getAnswer());
         currentAnswer.setCorrect(entity.isCorrect());
-        currentAnswer.setQuestion(entity.getQuestion());
         answerRepository.save(currentAnswer);
 
     }
 
     @Override
     public Answer findById(long id) {
-        return answerRepository.findById(id).get();
+        try {
+            return answerRepository.findById(id).get();
+        } catch (NoSuchElementException nsExc) {
+            return null;
+        }
     }
 
     public List<Answer> findAllByQuestion(Question question) {
-        return answerRepository.findAllByQuestion(question);
+        try {
+            return answerRepository.findAllByQuestion(question);
+        } catch (NoSuchElementException nsExc) {
+            return null;
+        }
     }
 
 }

@@ -64,4 +64,8 @@ public class QuestionService implements ServiceInterface<Question> {
 
         return returnMap;
     }
+
+    public Question findByQuestionQuestion(String question){
+        return questionRepository.findQuestionByQuestion(question);
+    }
 }

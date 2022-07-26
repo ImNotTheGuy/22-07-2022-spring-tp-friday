@@ -28,27 +28,26 @@ public class AnswerController {
     @PostMapping("answer")
     public void create(@RequestBody JSONObject jsonObject) {
         answerService.create(jsonObject);
-
     }
 
     @GetMapping("answer")
-    public List<Answer> findAll(){
+    public List<Answer> findAll() {
         return answerService.findAll();
     }
 
     @GetMapping("answer/{id}")
-    public Answer findById(@PathVariable("id") long id){
+    public Answer findById(@PathVariable("id") long id) {
         return answerService.findById(id);
     }
 
     @PatchMapping("answer/{id}")
-    public void update(@RequestBody Answer answer, @PathVariable("id") long id){
-        
+    public void update(@RequestBody Answer answer, @PathVariable("id") long id) {
+        System.out.println(answer);
         answerService.update(answer, id);
     }
 
     @DeleteMapping("answer/{id}")
-    public void deleteById(@PathVariable("id") long id){
+    public void deleteById(@PathVariable("id") long id) {
         answerService.deleteById(id);
     }
 

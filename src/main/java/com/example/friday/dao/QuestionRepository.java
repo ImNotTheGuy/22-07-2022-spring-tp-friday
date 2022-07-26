@@ -6,4 +6,5 @@ import com.example.friday.entity.Question;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     
+    public Question findQuestionByQuestion(String question);
 }
