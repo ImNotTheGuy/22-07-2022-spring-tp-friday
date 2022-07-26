@@ -116,9 +116,7 @@ public class GameController {
     @PostMapping("newGame")
     public void createNewGame(@RequestBody String jsonString){
 
-        // read JSON object
-        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject(); //FIXME: understand what to use to avoid deprecation warning
-
+        JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
         // get question 
         String questionString = jsonObject.get("question").getAsString();
 
