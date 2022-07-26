@@ -1,6 +1,5 @@
 package com.example.friday.entity;
 
-import java.util.List;
 import java.util.Map;
 
 public class NewGame {
